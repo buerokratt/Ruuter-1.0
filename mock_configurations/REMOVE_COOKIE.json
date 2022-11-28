@@ -1,0 +1,33 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "LOGOUT": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "proceed"
+        }
+      },
+      "proceed": {
+        "method": "post",
+        "endpoint": "http://localhost:8080/sandbox/ok",
+        "post_body_struct": {
+        },
+        "response_header": {
+          "Set-Cookie": {
+            "name": "PHPSESSID",
+            "httpOnly": false,
+            "maxAge": 0,
+            "setSecure": true,
+            "value": null
+          }
+        }
+      },
+      "response": {
+        "ok": "proceed",
+        "nok": "proceed"
+      }
+    }
+  }
+}
+

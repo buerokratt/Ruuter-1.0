@@ -1,0 +1,74 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "SET_ROLE_RESTRICTIONS": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "proceed"
+        }
+      },
+      "proceed": {
+        "method": "post",
+        "endpoint": "http://localhost:8080/sandbox/ok",
+        "post_body_struct": {
+        },
+        "response_header": {
+          "Set-Cookie": {
+            "name": "role_list",
+            "httpOnly": false,
+            "maxAge": 6000,
+            "setSecure": false,
+            "value": {
+              "read_only": {
+                "i18n_role_citizen": [
+                  {
+                    "name": "KASUTAJA DEMO",
+                    "ID": "TEST11111111"
+                  }
+                ],
+                "i18n_role_parent": [
+                  {
+                    "name": "Esimene Poeg",
+                    "ID": "334445555"
+                  },
+                  {
+                    "name": "Poeg II",
+                    "ID": "554445555"
+                  },
+                  {
+                    "name": "Tütar Laps",
+                    "ID": "778889999"
+                  }
+                ],
+                "i18n_role_organisations": [
+                  {
+                    "name": "Test OÜ",
+                    "ID": "111111111"
+                  },
+                  {
+                    "name": "Test2 OÜ",
+                    "ID": "22222222"
+                  },
+                  {
+                    "name": "Riigi Infosüsteemi Amet",
+                    "ID": "12345677"
+                  },
+                  {
+                    "name": "Test Kasutaja",
+                    "ID": "33333333"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "response": {
+        "ok": "proceed",
+        "nok": "proceed"
+      }
+    }
+  }
+}
+

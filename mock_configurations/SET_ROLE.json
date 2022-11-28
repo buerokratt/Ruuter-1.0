@@ -1,0 +1,32 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "SET_ROLE": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "proceed"
+        }
+      },
+      "proceed": {
+        "method": "post",
+        "endpoint": "http://localhost:8080/sandbox/ok",
+        "post_body_struct": {
+        },
+        "response_header": {
+          "Set-Cookie": {
+            "#.from_property": "{$incoming_request_body}",
+            "httpOnly": false,
+            "maxAge": 6000,
+            "setSecure": false
+          }
+        }
+      },
+      "response": {
+        "ok": "proceed",
+        "nok": "proceed"
+      }
+    }
+  }
+}
+

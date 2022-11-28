@@ -1,0 +1,26 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "VERIFY_SUCCESS": {
+      "verify": {
+        "verification_endpoint": {
+          "method": "post",
+          "post_body_struct": "{$incoming_request_body}",
+          "endpoint":"http://localhost:8080/sandbox/ok"
+        },
+        "response": {
+          "ok": "proceed1",
+          "nok": "proceed2"
+        }
+      },
+      "proceed1": {
+        "method": "get",
+        "endpoint": "http://localhost:8080/sandbox/ok"
+      },
+      "proceed2": {
+        "method": "get",
+        "endpoint": "http://localhost:8080/sandbox/nok"
+      }
+    }
+  }
+}

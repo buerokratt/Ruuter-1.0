@@ -1,0 +1,84 @@
+// this is a txt file with comments to offer a visual example about configuration .json
+// it is not a json file as JSON format itself does not allow comments and would confuse IDE-s and other visual tools
+// one can try different visual tools and and preferences to best read this document.
+// treating it as javascript file usually provides a semi-reasonable highlighting in most tools
+
+
+//start of the example configuration file
+{
+  "action_type": "BLOGIC", //action_type field, keyword defines the service used for processing the request
+  "destination": {
+    "INBOX": {   //the name of this field matches "code" string in api endpoint /mock/{code}
+      "verify": {
+        //in the response node fields "ok" and "nok" will contain the node names to which the service should proceed next.
+        //depending if the verification step returned ok or nok. In current configuration the process
+        //proceeds to node named "proceed" in both cases. We could also put keyword STOP for "nok"value. Or something like
+        //"proceeds_with_failed_verification" and then configure suitable node somewhere below.
+        //verification section might also contain an endpoint from which the actual verification result will
+        //be retrieved. Otherwise like in this example the verification will always return OK
+        "response": {
+          "ok": "proceed",
+          "nok": "proceed"
+        }
+      },
+      //this is the node where the actions taken after verify are defined
+      "proceed": {
+      //do a post request to endpoint. The post body is defined by post_body_parameters
+      //and post_body_struct. The fields returned by requests in post_body_parameters are
+      //replaced into post_body_struct. Then the struct is used as body to make the request.
+        "method": "post",
+        "endpoint": "https://some-endpoint.ee/andmemuundur/json/conf", //REQUEST 3
+        //data field will be replaced by post_body_parameters data field
+        "post_body_struct": {
+          "data": "{$.data}"
+        },
+        //will contain field "data"
+        "post_body_parameters": {
+        //do a post request to endpoint. This request ALSO has to fill it's post_body_struct from it's post_body_parameters
+          "data": {
+            "method": "post",
+            "endpoint": "https://some-endpoint.ee/some/thing/else",  //REQUEST 2
+            //replace field "userinfo.personalcode" from post_body_parameters to field "personalCode"
+            "post_body_struct": {
+              "personalCode": "{$.userinfo$.personalCode}"
+            },
+            //will contain field "userinfo.personalCode" that will be replaced into post_body_struct as
+            /described above. Will also fields shown below that will copied to post_body_struct as is
+            "post_body_parameters": {
+              "userinfo": {
+                "cookies": [
+                  "JWTTOKEN"
+                ],
+                //do a get request to endpoint
+                "method": "get",
+                "endpoint": "https://some-endpoint.ee/this/is/great", //REQUEST 1
+                //in case of failed get request (REQUEST 0) STOP, else go back to proceed node
+                "response": {
+                  "ok": "proceed",
+                  "nok": "stop"   //STOP IF REQUEST 1 FAILS
+                }
+              }
+            }
+          }
+        },
+        "response": {
+          "ok": "proceed",
+          "nok": "stop"  //STOP IF REQUEST 2 fails
+        }
+      }
+    }
+  }
+}
+
+// end of the example configuration file -- some further snippets to detail it and show further functionalities are
+// provided in a file called CONFIGURATION_EXAMPLE_SNIPPETS.json.txt
+
+
+
+
+
+
+
+
+
+

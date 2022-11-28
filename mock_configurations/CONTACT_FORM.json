@@ -1,0 +1,70 @@
+{
+  "action_type": "BLOGIC",
+  "destination": [
+    {
+      "contactForm": {
+        "verify": {
+          "turvis": {
+            "skip": true,
+            "method": "post",
+            "post_body_struct": "{$incoming_request_body}",
+            "endpoint": ""
+          },
+          "response": {
+            "ok": "proceed",
+            "nok": "stop"
+          }
+        },
+        "proceed": {
+          "method": "post",
+          "endpoint": "https://dmapper/json/v1/return_request",
+          "post_body_struct": {
+            "data": {
+              "request": "{$incoming_request_body}"
+            }
+          },
+          "response": {
+            "ok": "proceed",
+            "nok": "stop"
+          }
+        }
+      }
+    },
+    {
+      "contact_form_elastic": {
+        "verify": {
+          "turvis": {
+            "skip": true,
+            "method": "post",
+            "post_body_struct": "{$incoming_request_body}",
+            "endpoint": ""
+          },
+          "response": {
+            "ok": "proceed",
+            "nok": "proceed"
+          }
+        },
+        "proceed": {
+          "method": "post",
+          "post_body_struct": {
+            "clientType": "{#.contactForm#.request#.clientType}",
+            "name": "{#.contactForm#.request#.name}",
+            "identifier": "{#.contactForm#.request#.identifier}",
+            "email": "{#.contactForm#.request#.email}",
+            "phone": "{#.contactForm#.request#.phone}",
+            "typeOfRequest": "{#.contactForm#.request#.typeOfRequest}",
+            "subject": "{#.contactForm#.request#.subject}",
+            "content": "{#.contactForm#.request#.content}",
+            "termsAcceptance": "{#.contactForm#.request#.termsAcceptance}",
+            "metainfo": "{#.contactForm#.request#.metainfo}"
+          },
+          "endpoint": "https://localhost/contact_form/_doc",
+          "response": {
+            "ok": "proceed",
+            "nok": "stop"
+          }
+        }
+      }
+    }
+  ]
+}

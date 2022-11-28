@@ -1,0 +1,9 @@
+{
+  "input": {
+    "registrikood": "9999999234"
+  },
+  "validate_against": {
+    "registrikood": "1234567890"
+  },
+  "validation_type": "MUST_MATCH_ANY"
+}

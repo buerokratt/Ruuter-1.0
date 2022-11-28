@@ -1,0 +1,27 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "method": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "stop"
+        }
+      },
+      "proceed": {
+        "method": "post",
+        "endpoint": "http://localhost:23456/testUrl",
+        "post_body_struct": {
+          "data": {
+            "foo": "$_equals(fizz$,fizz)",
+            "bar": "$_equals({#.data#.fizz}$,{#.data#.fizz})"
+          }
+        }
+      },
+      "response": {
+        "ok": "proceed",
+        "nok": "on_error"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "valid": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "stop"
+        }
+      },
+      "proceed": {
+        "method": "put",
+        "endpoint": "http://localhost:23456/testUrl",
+        "post_body_struct": {
+          "foo": "bar"
+        },
+        "response": {
+          "ok": "proceed",
+          "nok": "on_error"
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,27 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "RUN_FUNCTION": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "proceed"
+        }
+      },
+      "proceed": {
+        "method": "post",
+        "endpoint": "http://localhost:8080/sandbox/ok",
+        "post_body_struct": {
+          "toLowercase": "$_toLowercase($_toUppercase($_toLowercase(THIS TEXT SHOULD BE LOWERCASE)))",
+          "decodeBase64": "$_decodeBase64(VGhpcyBzaG91bGQgYmUgZGVjb2RlZA==)",
+          "inception": "--->$_toUppercase($_decodeBase64(dGhpcyBzaG91bGQgYmUgdXBwZXJjYXNl))<--",
+          "dual": "$_toLowercase(THIS SHOULD BE LOWERCASE) and $_toUppercase(THIS SHOULD BE UPPERCASE)"
+        },
+        "response": {
+          "ok": "proceed",
+          "nok": "proceed"
+        }
+      }
+    }
+  }
+}

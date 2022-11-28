@@ -1,0 +1,34 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "TWO_OK": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "proceed"
+        }
+      },
+      "proceed": {
+        "method": "post",
+        "endpoint": "http://localhost:8080/sandbox/ok",
+        "post_body_struct": {
+          "data": "{$.data}"
+        },
+        "post_body_parameters": {
+          "data": {
+            "method": "get",
+            "endpoint": "http://localhost:8080/sandbox/nok",
+            "response": {
+              "ok": "proceed",
+              "nok": "ignore_error"
+            }
+          }
+        },
+        "response": {
+          "ok": "proceed",
+          "nok": "proceed"
+        }
+      }
+    }
+  }
+}

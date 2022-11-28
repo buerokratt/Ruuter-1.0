@@ -1,0 +1,28 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "method": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "stop"
+        }
+      },
+      "proceed": {
+        "method": "post",
+        "endpoint": "http://localhost:23456/testUrl",
+        "post_body_struct": {
+          "data": {
+            "bat": "$_toLowercase(\\\"yo\\\")",
+            "man": "{#.bat}",
+            "batman": "$_toLowercase({#.man})"
+          }
+        }
+      },
+      "response": {
+        "ok": "proceed",
+        "nok": "on_error"
+      }
+    }
+  }
+}

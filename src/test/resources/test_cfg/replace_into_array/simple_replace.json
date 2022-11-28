@@ -1,0 +1,34 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "valid": {
+      "verify": {
+        "turvis": {
+          "skip": true,
+          "method": "post",
+          "post_body_struct": "{$incoming_request_body}",
+          "endpoint": ""
+        },
+        "response": {
+          "ok": "proceed",
+          "nok": "stop"
+        }
+      },
+      "proceed": {
+        "method": "post",
+        "endpoint": "http://localhost:23456/testUrl",
+        "post_body_struct": {
+          "data": {
+            "foo": "{#.data#.fizz}",
+            "faa" : "dim"
+          }
+        }
+      },
+      "response": {
+        "ok": "proceed",
+        "nok": "on_error"
+      }
+    }
+  }
+}
+

@@ -1,0 +1,104 @@
+{
+  "action_type": "BLOGIC",
+  "destination": [
+    {
+      "ekl": {
+        "verify": {
+          "response": {
+            "ok": "proceed",
+            "nok": "proceed"
+          }
+        },
+        "proceed": {
+          "method": "post",
+          "endpoint": "http://localhost:23456/andmemuundur/json/v1/ekl",
+          "post_body_struct": {
+            "data": "{$.data}"
+          },
+          "post_body_parameters": {
+            "data": {
+              "method": "post",
+              "post_body_parameters": {
+                "userinfo": {
+                  "cookies": [
+                    "JWTTOKEN"
+                  ],
+                  "method": "get",
+                  "endpoint": "http://localhost:23456/jwt/userinfo",
+                  "response": {
+                    "ok": "proceed",
+                    "nok": "stop"
+                  }
+                }
+              },
+              "post_body_struct": {
+                "register": "ehis",
+                "service": "kodLoputunnistus",
+                "parameters": {
+                  "isikukood": "{$.userinfo$.personalCode}",
+                  "callerPersonalCode": "{$.userinfo$.personalCode}",
+                  "queriedPersonalCode": "{$.userinfo$.personalCode}"
+                }
+              },
+              "endpoint": "http://localhost:23456/some-service/api/v1/xtg1"
+            }
+          },
+          "response": {
+            "ok": "proceed",
+            "nok": "stop"
+          }
+        }
+      },
+      "frr": {
+        "verify": {
+          "response": {
+            "ok": "proceed",
+            "nok": "proceed"
+          }
+        },
+        "proceed": {
+          "method": "get",
+          "endpoint": "http://localhost:23456/someUrl?personIdCode={#.userinfo#.personalCode}",
+          "endpoint_parameters": {
+            "userinfo": {
+              "method": "get",
+              "endpoint": "http://localhost:23456/jwt/userinfo",
+              "response": {
+                "ok": "proceed",
+                "nok": "stop"
+              }
+            }
+          },
+          "response": {
+            "ok": "proceed",
+            "nok": "stop"
+          }
+        }
+      }
+    },
+    {
+      "forwardService": {
+        "verify": {
+          "response": {
+            "ok": "proceed",
+            "nok": "proceed"
+          }
+        },
+        "proceed": {
+          "method": "post",
+          "endpoint": "http://localhost:23456/fwd-endpoint/",
+          "post_body_struct": {
+            "data" : {
+              "ekl" : "{#.ekl}",
+              "frr" : "{#.frr}"
+            }
+          },
+          "response": {
+            "ok": "proceed",
+            "nok": "ignore_error"
+          }
+        }
+      }
+    }
+  ]
+}

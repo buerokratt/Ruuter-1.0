@@ -1,0 +1,13 @@
+{
+  "action_type": "FWD",
+  "destination": {
+    "FORWARD": {
+      "method": "get",
+      "endpoint": "http://localhost:8080/sandbox/ok",
+      "response": {
+        "ok": "proceed",
+        "nok": "proceed"
+      }
+    }
+  }
+}

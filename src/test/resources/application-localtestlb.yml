@@ -1,0 +1,41 @@
+# example of how to enable client-side loadbalancer and define the simple service discovery instances.
+# reference urls file contains an example of how to structure the lb urls.
+ruuter:
+  config.env.file.path: /app/config/urls.lb.env.json
+
+  reactive.client:
+    load-balancer.enabled: true
+
+spring.cloud:
+  discovery.client.simple:
+    instances:
+      service0:
+        - uri: "https://service0:8444"
+      service1:
+        - uri: "http://service1:8902"
+      service2:
+        - uri: "http://service2:9000"
+      service3:
+        - uri: "http://service3:8901"
+      service4:
+        - uri: "http://service4:8903"
+
+  loadbalancer:
+    # health check based routing when target nodes have health endpoints available
+    # (only checks for status code 200).
+    configurations: "health-check"
+
+    health-check:
+      # path per service, defaults to /actuator/health
+      # No need to specify these if:
+      #  1. actuator is enabled
+      #  2. health endpoint exposed on service port
+      #  3. app is deployed as ROOT application (/ is application root)
+      path:
+        tim: /healthz
+        service0: /service0/actuator/health
+        service1: /service1/actuator/health
+        service2: /service2/actuator/health
+        service3: /service3/actuator/health
+
+

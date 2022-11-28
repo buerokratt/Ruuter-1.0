@@ -1,0 +1,32 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "method": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "stop"
+        }
+      },
+      "proceed": {
+        "method": "post",
+        "endpoint": "http://localhost:23456/testUrl",
+        "post_body_struct": {
+          "outArray": [
+            {
+              "#.from_property": "{#.emails}",
+              "properties": {
+                "address": "prefix-{#.email}-suffix",
+                "activated": true
+              }
+            }
+          ]
+        }
+      },
+      "response": {
+        "ok": "proceed",
+        "nok": "on_error"
+      }
+    }
+  }
+}

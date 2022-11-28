@@ -1,0 +1,12 @@
+{
+  "action_type": "FWD",
+  "destination": {
+    "XM": {
+      "endpoint": "{elastic_url}",
+      "response": {
+        "ok": "proceed",
+        "nok": "stop"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "req": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "stop"
+        }
+      },
+      "proceed": {
+        "method": "get",
+        "endpoint": "http://localhost:23456/testUrl",
+        "request_header": {
+          "x-api-key": "{#.apiKey}"
+        },
+        "response": {
+          "ok": "proceed",
+          "nok": "on_error"
+        }
+      }
+    }
+  }
+}
+

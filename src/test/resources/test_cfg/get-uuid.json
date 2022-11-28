@@ -1,0 +1,24 @@
+{
+  "action_type": "BLOGIC",
+  "destination": [
+    {
+      "get_uuid": {
+        "verify": {
+          "response": {
+            "ok": "proceed",
+            "nok": "stop"
+          }
+        },
+        "proceed": {
+          "method": "post",
+          "endpoint": "http://localhost:65432/functions/generateRandomUuid",
+          "post_body_struct": {},
+          "response": {
+            "ok": "proceed",
+            "nok": "stop"
+          }
+        }
+      }
+    }
+  ]
+}

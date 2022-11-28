@@ -1,0 +1,69 @@
+{
+  "action_type": "BLOGIC",
+  "destination": [
+    {
+      "firstPost": {
+        "verify": {
+          "response": {
+            "ok": "proceed",
+            "nok": "proceed"
+          }
+        },
+        "proceed": {
+          "method": "post",
+          "endpoint": "http://localhost:8080/sandbox/ok",
+          "post_body_struct": {
+            "stuff1": "I was posted in first request"
+          }
+        },
+        "response": {
+          "ok": "proceed",
+          "nok": "proceed"
+        }
+      }
+    },
+    {
+      "secondPost": {
+        "verify": {
+          "response": {
+            "ok": "proceed",
+            "nok": "proceed"
+          }
+        },
+        "proceed": {
+          "method": "post",
+          "endpoint": "http://localhost:8080/sandbox/ok",
+          "post_body_struct": {
+            "stuff2": "I was posted in second request"
+          }
+        },
+        "response": {
+          "ok": "proceed",
+          "nok": "proceed"
+        }
+      }
+    },
+    {
+      "thirdPost": {
+        "verify": {
+          "response": {
+            "ok": "proceed",
+            "nok": "proceed"
+          }
+        },
+        "proceed": {
+          "method": "post",
+          "endpoint": "http://localhost:8080/sandbox/ok",
+          "post_body_struct": {
+            "firstReqInfo": "{#.firstPost#.postBody#.stuff1}",
+            "secondReqInfo" :  "{#.secondPost#.postBody#.stuff2}"
+          }
+        },
+        "response": {
+          "ok": "proceed",
+          "nok": "proceed"
+        }
+      }
+    }
+  ]
+}

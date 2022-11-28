@@ -1,0 +1,38 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "method": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "stop"
+        }
+      },
+      "proceed": {
+        "method": "post",
+        "endpoint": "http://localhost:23456/testUrl",
+        "post_body_struct": {
+          "data": {
+            "bat": "$_toLowercase({$.testData$.bat}) $_toUppercase({$.testData$.man})",
+            "man": "$_toUppercase({$.testData$.batman})",
+            "batman": "{$.testData$.batman}"
+          }
+        },
+        "post_body_parameters": {
+          "testData": {
+            "method":"get",
+            "endpoint": "http://localhost:23456/data",
+            "response": {
+              "ok": "proceed",
+              "nok": "proceed"
+            }
+          }
+        }
+      },
+      "response": {
+        "ok": "proceed",
+        "nok": "on_error"
+      }
+    }
+  }
+}

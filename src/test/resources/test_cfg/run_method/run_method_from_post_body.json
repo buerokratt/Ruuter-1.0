@@ -1,0 +1,28 @@
+{
+  "action_type": "BLOGIC",
+  "destination": {
+    "method": {
+      "verify": {
+        "response": {
+          "ok": "proceed",
+          "nok": "stop"
+        }
+      },
+      "proceed": {
+        "method": "post",
+        "endpoint": "http://localhost:23456/testUrl",
+        "post_body_struct": {
+          "data": {
+            "bat": "$_toLowercase($_trim(   BRUCE    )) $_toLowercase(WAYNE)",
+            "man": "$_toUppercase(Bruce Wayne)",
+            "batman": "Bat-(a.k.a.)-$_toUppercase(Bruce-Wayne)-man"
+          }
+        }
+      },
+      "response": {
+        "ok": "proceed",
+        "nok": "on_error"
+      }
+    }
+  }
+}
