@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  ruuter-v1:
+    container_name: ruuterv1
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    networks:
+      - ruuter
+
+networks:
+  ruuter:
+    driver: bridge
