@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  ruuter-v1:
+    environment:
+      - LOG_LEVEL_INFO=WARN
+      - LOG_LEVEL_TIMING=INFO
+    container_name: ruuterv1
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    networks:
+      - ruuter
+
+networks:
+  ruuter:
+    driver: bridge
